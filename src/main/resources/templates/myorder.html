@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LibTest管理员主页</title>
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/index.css" rel="stylesheet">
+    <link href="../static/css/dashboard.css" rel="stylesheet">
+    <script src="webjars/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="../static/js/dashboard.js"></script>
+</head>
+<body>
+<div th:insert="commons::headbar"></div>
+
+<main role="main" class="col-md-10 ml-sm-auto col-lg-11 px-md-4">
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>借阅记录ID</th>
+            <th>借阅人ID</th>
+            <th>借阅人账号</th>
+            <th>图书ID</th>
+            <th>书名</th>
+            <th>借出时间</th>
+            <th>归还时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+
+        <tr th:each="order:${orders}" th:object="${order}">
+            <td th:text="*{orderID}"></td>
+            <td th:text="*{libUser.userId}"></td>
+            <td th:text="*{libUser.userName}"></td>
+            <td th:text="*{book.bookID}"></td>
+            <td th:text="*{book.bookName}"></td>
+            <td th:text="*{lendTime}"></td>
+            <td th:text="*{returnTime}"></td>
+            <td th:text="${order.flag==0?'未归还':'已归还'}"></td>
+            <td><a class="btn btn-info" role="button"
+                   th:class="${order.flag==0?'btn btn-info':'btn btn-info disabled'}"
+                   th:href="@{'/return/'+${order.orderID}}" th:method="get">
+                归还</a></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    <div th:insert="commons::footbar"></div>
+</main>
+</body>
+</html>

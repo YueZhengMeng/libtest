@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LibTest管理员主页</title>
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/index.css" rel="stylesheet">
+    <link href="../../static/css/dashboard.css" rel="stylesheet">
+    <script src="webjars/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="../../static/js/dashboard.js"></script>
+</head>
+<body>
+<div th:insert="commons::headbar"></div>
+
+<div th:insert="commons::sidebar(act='actuser')"></div>
+
+<main role="main" class="col-md-10 ml-sm-auto col-lg-11 px-md-4">
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>用户ID</th>
+            <th>账户名</th>
+            <th>密码</th>
+            <th>权限</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+
+        <tr th:each="user:${users}" th:object="${user}">
+            <td th:text="*{userId}"></td>
+            <td th:text="*{userName}"></td>
+            <td th:text="*{password}"></td>
+            <td th:class="${user.role=='banned'?'bg-danger':''}"
+                th:text="*{role}"></td>
+            <td>
+                <a class="btn btn-info" role="button"
+                   th:if="${user.role!='banned'}" th:class="${'btn btn-danger'}"
+                   th:href="@{'/admin/banuser/'+${user.userId}}" th:method="get">
+                    禁用</a>
+
+                <a class="btn btn-info" role="button"
+                   th:if="${user.role=='banned'}" th:class="${'btn btn-success'}"
+                   th:href="@{'/admin/restoreuser/'+${user.userId}}" th:method="get">
+                    恢复</a>
+            </td>>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    <div th:insert="commons::footbar"></div>
+</main>
+</body>
+</html>

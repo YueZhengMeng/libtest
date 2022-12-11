@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LibTest管理员主页</title>
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/index.css" rel="stylesheet">
+    <link href="../../static/css/dashboard.css" rel="stylesheet">
+    <script src="webjars/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="../../static/js/dashboard.js"></script>
+</head>
+<body>
+<div th:insert="commons::headbar"></div>
+
+<div th:insert="commons::sidebar(act='actbook')"></div>
+
+<main role="main" class="col-md-10 ml-sm-auto col-lg-11 px-md-4">
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>图书ID</th>
+            <th>书名</th>
+            <th>作者</th>
+            <th>出版社</th>
+            <th>定价</th>
+            <th>总库存</th>
+            <th>借出数量</th>
+            <th>现有库存</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+
+        <tr th:each="book:${books}" th:object="${book}">
+            <td th:text="*{bookID}"></td>
+            <td th:text="*{bookName}"></td>
+            <td th:text="*{author}"></td>
+            <td th:text="*{publishing}"></td>
+            <td th:text="*{price}"></td>
+            <td th:text="*{totalCount}"></td>
+            <td th:text="*{lendCount}"></td>
+            <td th:class="${book.nowCount==0?'bg-warning':''}"
+                    th:text="*{nowCount}"></td>
+            <td>
+                <a class="btn btn-danger" role="button"
+                   th:href="@{'/admin/deletebook/'+${book.bookID}}" th:method="get">
+                    删除图书</a>
+            </td>>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <a class="btn btn-success" role="button"
+                   th:href="@{/admin/toaddbook}" th:method="get">
+                    新增图书</a>
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    <div th:insert="commons::footbar"></div>
+</main>
+</body>
+</html>

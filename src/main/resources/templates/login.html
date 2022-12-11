@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LibTest登录</title>
+
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/login}" method="post">
+    <img class="mb-4" src="/static/img/login/loginicon.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">请&emsp;登&emsp;录</h1>
+    <div th:if="${param.error}" style="color: #ff0000">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}" style="color: orange">
+        You have been logged out.
+    </div>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <label for="inputText" class="sr-only">用户名</label>
+    <input type="text" id="inputText" name="username" class="form-control" placeholder="用户名" required autofocus>
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
+    <div class="checkbox mb-3">
+        <label>Remembering me is Auto abled</label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In">Sign in</button>
+    <a class="btn btn-lg btn-success btn-block" th:href="@{/toregiste}">注册</a>
+    <p class="mt-5 mb-3 text-muted">By: 1959234 pwb</p>
+</form>
+</body>
+</html>

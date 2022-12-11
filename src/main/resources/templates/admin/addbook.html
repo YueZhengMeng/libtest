@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>新增图书</title>
+
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/admin/doaddbook}" method="post">
+    <img class="mb-4" src="/static/img/login/loginicon.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">新增图书</h1>
+    <label for="bookName" class="sr-only">书名</label>
+    <input type="text" id="bookName" name="bookName" class="form-control" placeholder="书名" required autofocus>
+
+    <label for="author" class="sr-only">作者</label>
+    <input type="text" id="author" name="author" class="form-control" placeholder="作者">
+
+    <label for="publish" class="sr-only">出版社</label>
+    <input type="text" id="publish" name="publish" class="form-control" placeholder="出版社">
+
+    <label for="price" class="sr-only">价格</label>
+    <input type="text" id="price" name="price" class="form-control" placeholder="价格">
+
+    <label for="totalCount" class="sr-only">总库存</label>
+    <input type="text" id="totalCount" name="totalCount" class="form-control" placeholder="总库存">
+
+    <label for="lendCount" class="sr-only">已借出</label>
+    <input type="text" id="lendCount" name="lendCount" class="form-control" placeholder="已借出">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="提交">提交</button>
+    <p class="mt-5 mb-3 text-muted">By: 1959234 pwb</p>
+</form>
+</body>
+</html>

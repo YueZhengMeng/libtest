@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LibTest注册</title>
+
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/doregiste}" method="post">
+    <img class="mb-4" src="/static/img/login/loginicon.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">注&emsp;&emsp;册</h1>
+
+    <label for="inputText" class="sr-only">用户名</label>
+    <input type="text" id="inputText" name="username" class="form-control" placeholder="用户名" required autofocus>
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
+    <label for="repeatPassword" class="sr-only">重复密码</label>
+    <input type="password" id="repeatPassword" name="repeatpassword" class="form-control" placeholder="重复密码" required>
+    <br/>
+    <div th:if="${pwderror}==1" style="color: #ff0000">
+        两次输入的密码不一致
+    </div>
+    <div th:if="${pwderror}==2" style="color: #ff0000">
+        用户名已存在
+    </div>
+    <br/>
+    <button class="btn btn-lg btn-success btn-block" type="submit" value="Sign In">提交注册</button>
+    <p class="mt-5 mb-3 text-muted">By: 1959234 pwb</p>
+</form>
+</body>
+</html>

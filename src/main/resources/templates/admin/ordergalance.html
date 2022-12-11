@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LibTest管理员主页</title>
+    <link href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/index.css" rel="stylesheet">
+    <link href="../../static/css/dashboard.css" rel="stylesheet">
+    <script src="webjars/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="../../static/js/dashboard.js"></script>
+    <script src="../../static/js/echarts.js"></script>
+</head>
+<body>
+<div th:insert="commons::headbar"></div>
+
+<div th:insert="commons::sidebar(act='actshopping-cart')"></div>
+
+<main role="main" class="col-md-10 ml-sm-auto col-lg-11 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">统计</h1>
+    </div>
+
+    <div class="my-4 w-100" id="myChart" style="width:900px; height:680px"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('myChart'));
+        var count=[[${orderCount}]]
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '本周借阅数量'
+            },
+            tooltip: {},
+            legend: {
+                data:['借阅量']
+            },
+            xAxis: {
+                data: ["周一","周二","周三","周四","周五","周六","周日"]
+            },
+            yAxis: {},
+            series: [{
+                name: '借阅量',
+                type: 'bar',
+                color:'#2a75e2',
+                data: [5, 20, 36, 10, 10, 20,count]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+
+
+    <div th:insert="commons::footbar"></div>
+</main>
+</body>
+</html>
